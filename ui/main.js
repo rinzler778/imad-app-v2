@@ -6,8 +6,7 @@ button.onclick = function() {
     //1
     var request = new XMLHttpRequest();
     
-    
-    //2
+        //2
 request.onreadystatechange = function() {
     if (request.readyState === XMLHttpRequest.DONE) {
         
@@ -19,5 +18,8 @@ request.onreadystatechange = function() {
     }
     
 };
-   
+
+//3
+request.open('GET', 'http://rinzler778.imad.hasura-app.in/counter',true);
+request.send(null);
 };
