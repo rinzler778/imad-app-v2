@@ -20,6 +20,6 @@ request.onreadystatechange = function() {
 };
 
 //3
-request.open('GET', 'http://rinzler778.imad.hasura-app.in/counter',true);
+request.open('GET', 'http://rinzler778.imad.hasura-app.io/counter', true);
 request.send(null);
 };
