@@ -25,8 +25,6 @@ request.send(null);
 };
 
 //submit
-var nameInput = document.getElementById('name');
-var name = nameInput.value;
 var submit = document.getElementById('submit_btn');
 submit.onclick = function () {
    
@@ -53,6 +51,8 @@ request.onreadystatechange = function() {
 };
 
 //3
+var nameInput = document.getElementById('name');
+var name = nameInput.value;
 request.open('GET', 'http://rinzler778.imad.hasura-app.io/submit-name?name=' + name, true);
 request.send(null);
   //make request to server and send the name
