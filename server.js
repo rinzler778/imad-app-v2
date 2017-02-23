@@ -90,7 +90,7 @@ app.get('/counter', function (req, res){
 });
 
 var names = [];
-app.get('/submit-name/:name', function(req, res){   //URL /?name=xxxx
+app.get('/submit-name', function(req, res){   //URL /?name=xxxx
     //get name
     var name=req.query.name;
     
