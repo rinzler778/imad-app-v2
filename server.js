@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
 
 var config = {
     user: 'rinzler778',
@@ -13,43 +14,6 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
-
-
-var articles = {
-    'article-one': {
-    title: 'Article One | Rinzler778',
-    heading: 'Article One',
-    date: 'Feb 19, 2017',
-    content: `   <p>
-                This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. 
-            </p>
-            <p>
-                This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. 
-
-                </p>
-            <p>
-                This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. This is my first article ie article one. 
-            </p>`
-    },
-    'article-two': {
-        title: 'Article Two | Rinzler778',
-    heading: 'Article Two',
-    date: 'Feb 19, 2017',
-    content: `   <p>
-                This is Article two.
-                
-            </p>`
-        },
-    'article-three': {
-        title: 'Article Three | Rinzler778',
-    heading: 'Article Three',
-    date: 'Feb 19, 2017',
-    content: `   <p>
-                Now This is Article three.
-            </p>`
-    }
-};
-    
     
     function createTemplate (data) {
     var title = data.title;
@@ -91,6 +55,20 @@ return htmlTemplate;
 app.get('/', function (req, res) { 
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
+
+
+function hash (input, salt) {
+//
+var hashed  = crypto.pbkdf2Sync(input, salt, 1000, 512, 'sha512');
+    return hashed.toString('hex');
+}
+
+
+app.get('/hash/:input', function(req, res) {
+   var hashedString = hash(req.params.input, 'random-string');
+   res.send(hashedString);
+});
+
 
 var pool = new Pool(config);
 app.get('/test-db', function (req,res) {
