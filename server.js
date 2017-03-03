@@ -66,7 +66,7 @@ var hashed  = crypto.pbkdf2Sync(input, salt, 1000, 512, 'sha512');
 }
 
 
-app.gett('/hash/:input', function(req, res) {
+app.get('/hash/:input', function(req, res) {
    var hashedString = hash(req.params.input, 'random-string');
    res.send(hashedString);
 });
