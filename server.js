@@ -74,6 +74,7 @@ app.get('/hash/:input', function(req, res) {
 app.post('/create-user', function (req, res){ 
     //
     //
+    //
     var username = req.body.username;
     var password = req.body.password;
     var salt = crypto.randomBytes(128).toString('hex');
@@ -82,7 +83,6 @@ app.post('/create-user', function (req, res){
         if(err) {
             res.status(500).send(err.toString());
         } else {
-            
             res.send('User successfully created: ' + username);
         } 
     });
@@ -124,7 +124,7 @@ app.get('/articles/:articleName', function (req,res) {
  //
  pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function (err, result){
      if (err){
-         res.sattus(500).send(err.toString());
+         res.status(500).send(err.toString());
      } else {
          if (result.rows.length === 0) {
              res.status(404).send('Article not found');
