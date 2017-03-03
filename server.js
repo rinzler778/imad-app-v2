@@ -3,7 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
 var config = {
     user: 'rinzler778',
@@ -15,7 +15,7 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
     
     function createTemplate (data) {
     var title = data.title;
@@ -61,8 +61,8 @@ app.get('/', function (req, res) {
 
 function hash (input, salt) {
 //
-var hashed  = crypto.pbkdf2Sync(input, salt, 1000, 512, 'sha512');
-    return ["pbkdf2", "1000", salt, hashed.toString('hex')].join('$');
+var hashed  = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return hashed.toString('hex');
 }
 
 
@@ -71,7 +71,7 @@ app.get('/hash/:input', function(req, res) {
    res.send(hashedString);
 });
 
-app.post('/create-user', function (req, res){ 
+/*app.post('/create-user', function (req, res){ 
     //
     //
     //
@@ -86,7 +86,7 @@ app.post('/create-user', function (req, res){
             res.send('User successfully created: ' + username);
         } 
     });
-});
+}); */
 
 var pool = new Pool(config);
 app.get('/test-db', function (req,res) {
