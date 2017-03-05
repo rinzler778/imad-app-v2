@@ -11,7 +11,7 @@ var config = {
     database: 'rinzler778',
     host: 'db.imad.hasura-app.io',
     port: '5432',
-    password: process.env.DB_PASSWORD
+    password: 'db-rinzler778-53779',
 };
 
 var app = express();
